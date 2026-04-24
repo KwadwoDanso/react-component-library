@@ -27,3 +27,21 @@ export interface UserProfileCardProps {
     onEdit?: (userId: string) => void; // optional callback for edit button
     children?: React.ReactNode; // optional extra content at the bottom
 }
+
+// ProductDisplay
+export interface Product {
+    id: string;
+    name: string;
+    price: number;
+    description: string;
+    imageUrl?: string;         // optional product image
+    inStock: boolean;
+}
+
+export interface ProductDisplayProps {
+    product: Product;          // the product object to display
+    showDescription?: boolean; // whether to show description (default false)
+    showStockStatus?: boolean; // whether to show stock badge (default false)
+    onAddToCart?: (productId: string) => void; // optional cart callback
+    children?: React.ReactNode; // optional extra content at the bottom
+}
