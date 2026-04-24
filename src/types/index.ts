@@ -10,3 +10,20 @@ export interface AlertBoxProps {
     onClose?: () => void;      // optional callback when close is clicked
     children?: React.ReactNode; // optional extra content below the message
 }
+
+// UserProfileCard
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    avatarUrl?: string;        // optional — shows initials if missing
+}
+
+export interface UserProfileCardProps {
+    user: User;                // the user object to display
+    showEmail?: boolean;       // whether to show the email (default false)
+    showRole?: boolean;        // whether to show the role (default false)
+    onEdit?: (userId: string) => void; // optional callback for edit button
+    children?: React.ReactNode; // optional extra content at the bottom
+}
