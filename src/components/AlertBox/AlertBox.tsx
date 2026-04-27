@@ -21,3 +21,28 @@ function AlertBox({ type, message, onClose, children }: AlertBoxProps) {
             {/* Top row: message and optional close button */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <p style={{ margin: 0, fontWeight: 500 }}>{message}</p>
+
+                {/* Only render close button if onClose was passed */}
+                {onClose && (
+                    <button
+                        onClick={onClose}
+                        style={{
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            fontSize: "1.25rem",
+                            color: "inherit",
+                        }}
+                    >
+                        x
+                    </button>
+                )}
+            </div>
+
+            {/* Render children below the message if any were passed */}
+            {children && <div style={{ marginTop: "0.5rem" }}>{children}</div>}
+        </div>
+    );
+}
+
+export default AlertBox;
