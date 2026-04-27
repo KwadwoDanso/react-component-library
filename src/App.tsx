@@ -38,3 +38,74 @@ function App() {
     description: "Portable Bluetooth speaker with 360 sound.",
     inStock: false,
   };
+
+  // Callback passed to ProductDisplay via the onAddToCart prop
+  const handleAddToCart = (productId: string) => {
+    console.log("Added product " + productId + " to cart");
+    setShowAlert(true);
+  };
+
+  return (
+    <div style={{ maxWidth: "800px", margin: "2rem auto", padding: "0 1rem" }}>
+      <h1>Component Library Demo</h1>
+
+      {/* AlertBox — only visible after clicking Add to Cart */}
+      {showAlert && (
+        <AlertBox
+          type="success"
+          message="Product added to cart!"
+          onClose={() => setShowAlert(false)}
+        >
+          {/* Children prop: extra content inside the alert */}
+          <p style={{ fontSize: "0.85rem" }}>You can continue shopping.</p>
+        </AlertBox>
+      )}
+
+      {/* Alert type examples */}
+      <h2 style={{ marginTop: "1.5rem" }}>Alert Examples</h2>
+      <AlertBox type="info" message="This is an informational message." />
+      <AlertBox type="warning" message="Please review your input before submitting." />
+      <AlertBox type="error" message="Something went wrong. Please try again." />
+
+      {/* UserProfileCard with all optional props enabled */}
+      <h2 style={{ marginTop: "1.5rem" }}>User Profile</h2>
+      <UserProfileCard
+        user={user}
+        showEmail={true}
+        showRole={true}
+        onEdit={(userId) => alert("Editing user " + userId)}
+      >
+        {/* Children prop: extra content at the bottom of the card */}
+        <p style={{ fontSize: "0.85rem", color: "#6b7280" }}>
+          Last login: 2 hours ago
+        </p>
+      </UserProfileCard>
+
+      {/* Two ProductDisplay cards side by side */}
+      <h2 style={{ marginTop: "1.5rem" }}>Products</h2>
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        {/* In-stock product with all options shown */}
+        <ProductDisplay
+          product={product}
+          showDescription={true}
+          showStockStatus={true}
+          onAddToCart={handleAddToCart}
+        >
+          <p style={{ fontSize: "0.85rem", color: "#6b7280" }}>
+            Free shipping available
+          </p>
+        </ProductDisplay>
+
+        {/* Out-of-stock product — button will be disabled */}
+        <ProductDisplay
+          product={soldOutProduct}
+          showDescription={true}
+          showStockStatus={true}
+          onAddToCart={handleAddToCart}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default App;
