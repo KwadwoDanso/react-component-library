@@ -50,4 +50,43 @@ function UserProfileCard({ user, showEmail = false, showRole = false, onEdit, ch
                 <div>
                     <h3 style={{ margin: 0, fontSize: "1.1rem" }}>{user.name}</h3>
                     {/* Ternary-style conditional: only show email if showEmail is true */}
-                    
+                    {showEmail && (
+                        <p style={{ margin: "0.25rem 0 0", color: "#6b7280", fontSize: "0.9rem" }}>
+                            {user.email}
+                        </p>
+                    )}
+                </div>
+            </div>
+
+            {/* Only show role if showRole is true */}
+            {showRole && (
+                <p style={{ margin: "0 0 0.75rem", color: "#6b7280", fontSize: "0.9rem" }}>
+                    Role: {user.role}
+                </p>
+            )}
+
+            {/* Only show Edit button if onEdit callback was passed */}
+            {onEdit && (
+                <button
+                    onClick={() => onEdit(user.id)}
+                    style={{
+                        padding: "0.4rem 1rem",
+                        backgroundColor: "#3b82f6",
+                        color: "#ffffff",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        fontSize: "0.9rem",
+                    }}
+                >
+                    Edit Profile
+                </button>
+            )}
+
+            {/* Render children at the bottom of the card */}
+            {children && <div style={{ marginTop: "0.75rem" }}>{children}</div>}
+        </div>
+    );
+}
+
+export default UserProfileCard;
